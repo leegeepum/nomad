@@ -1,19 +1,17 @@
-const title = document.querySelector("#title");
+const clockContainer = document.querySelector(".js-clock"), 
+    clockTitle = clockContainer.querySelector(".js-title");
 
-const COLOR_BASE = "white";
-const COLOR_CHANGE = "black";
-
-function handleclick() {
-    if (title.style.color === COLOR_BASE) {
-        title.style.color = COLOR_CHANGE;
-    } else {
-        title.style.color = COLOR_BASE;
-    }
+function getTime() {
+    const date = new Date();
+    const minutes = date.getMinutes();
+    const hours = date.getHours();
+    const seconds = date.getSeconds();
+    clockTitle.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 }
 
 function init() {
-    title.style.color = COLOR_BASE;
-    title.addEventListener("click", handleclick);
+    getTime();
+    setInterval(getTime, 1000);
 }
 
 init();
